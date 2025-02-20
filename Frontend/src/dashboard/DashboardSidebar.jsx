@@ -34,9 +34,9 @@ const DashboardSidebar = () => {
       <PhoneNavbar/>
       {/* Sidebar Toggle Button for Mobile */}
       <div className="flex  justify-between items-center bg-green-500 py-2 w-full fixed md:hidden z-50">
-        <div className="pl-3 font-bold text-lg">Dashboard</div>
-        <button onClick={toggleSidebar} className="rounded-md pr-3" aria-label="Toggle sidebar">
-          <FiMenu className="text-xl" />
+        <div className="pl-3 font-bold text-gray-800 text-lg">Dashboard</div>
+        <button onClick={toggleSidebar} className="rounded-md pr-5 text-gray-800" aria-label="Toggle sidebar">
+          <FiMenu className="text-3xl" />
         </button>
       </div>
 

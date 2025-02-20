@@ -51,7 +51,7 @@ const UserProfile = () => {
     <>
       <div className="md:mt-[74px] mt-10 p-3 md:p-4">
         <div className="w-full bg-gray-100 h-screen">
-          <h2 className="md:text-3xl text-xl font-bold md:mb-4 mb-3 text-center">
+          <h2 className="md:text-3xl text-xl text-gray-700 font-bold md:mb-4 mb-3 text-center">
             Your Profile
           </h2>
           <div className="bg-white shadow-lg md:p-12 p-3 rounded-xl">
@@ -94,7 +94,7 @@ const UserProfile = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full md:px-4 px-3 md:py-3 py-2 border-2 border-gray-300 rounded-lg text-gray-700 focus:outline-none "
+                    className="w-full md:px-4 px-3 md:py-3 py-2 border-2 bg-white border-gray-300 rounded-lg text-gray-700 focus:outline-none "
                     placeholder="Enter your name"
                   />
                 </div>
@@ -107,7 +107,7 @@ const UserProfile = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full md:px-4 px-3 md:py-3 py-2 border-2 border-gray-300 rounded-lg text-gray-700 focus:outline-none "
+                    className="w-full md:px-4 px-3 md:py-3 py-2 border-2 border-gray-300 rounded-lg bg-white text-gray-700 focus:outline-none "
                     placeholder="Enter your email"
                   />
                 </div>
@@ -120,7 +120,7 @@ const UserProfile = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full md:px-4 px-3 md:py-3 py-2 border-2 border-gray-300 rounded-lg text-gray-700 focus:outline-none "
+                    className="w-full md:px-4 px-3 md:py-3 py-2 border-2 bg-white border-gray-300 rounded-lg text-gray-700 focus:outline-none "
                     placeholder="Enter your phone number"
                   />
                 </div>
@@ -132,7 +132,7 @@ const UserProfile = () => {
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
-                    className="w-full md:px-4 px-3 md:py-3 py-2 border-2 border-gray-300 rounded-lg text-gray-700 focus:outline-none  resize-none"
+                    className="w-full md:px-4 px-3 md:py-3 py-2 bg-white border-2 border-gray-300 rounded-lg text-gray-700 focus:outline-none  resize-none"
                     rows="4"
                     placeholder="Enter your address"
                   />

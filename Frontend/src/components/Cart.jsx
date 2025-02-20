@@ -160,7 +160,7 @@ const Cart = () => {
 
         {loading ? (
           <div className="text-center py-8">
-            <p className="text-lg text-gray-700">Loading cart data...</p>
+            <p className="text-lg text-gray-700 flex justify-center h-screen items-center">Loading cart data...</p>
           </div>
         ) : error ? (
           <div className="text-center py-8">

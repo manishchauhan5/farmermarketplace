@@ -174,7 +174,7 @@ const ProductCard = ({ id ,name, price, discountedPrice, rating, expiry, image }
         </div>
 
         {/* Right Section: Expiry, Price, and Add Button */}
-        <div className="w-1/3 flex-shrink-0 flex flex-col items-end">
+        <div className="w-1/4 flex-shrink-0 flex flex-col items-end">
           {/* Expiry */}
           <div className="flex items-center bg-yellow-100 text-yellow-600 font-semibold text-xs px-1 py-1 rounded">
             <PiClockCountdownFill className="h-4 w-4  pr-0.5" /> {formatExpiry(expiry)}

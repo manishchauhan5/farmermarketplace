@@ -9,7 +9,7 @@ const SellProduct = () => {
     expiryDate: "",
     actualPrice: "",
     offerPrice: "",
-    image: null, // Use null for file inputs
+    image: null, 
   });
 
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ const SellProduct = () => {
   };
 
   const handleImageUpload = (e) => {
-    const file = e.target.files[0]; // Fix: Use e.target.files[0]
+    const file = e.target.files[0]; 
     if (file && file.type.startsWith("image/")) {
       setFormData({ ...formData, image: file });
     } else {
@@ -36,7 +36,6 @@ const SellProduct = () => {
       await addProduct(formData);
       alert("Product added successfully!");
 
-      // Reset form
       setFormData({
         category: "",
         name: "",
@@ -47,8 +46,7 @@ const SellProduct = () => {
         image: null,
       });
 
-      // Reset file input
-      document.getElementById("image").value = ""; // Clear file input
+      document.getElementById("image").value = ""; 
     } catch (error) {
       console.error("Error adding product:", error);
       alert(error.message || "Failed to add product. Please try again.");
@@ -61,7 +59,7 @@ const SellProduct = () => {
     <>
       <div className="md:mt-[74px] mt-10 p-2 md:p-4">
       <div className="mx-auto bg-white shadow-md p-4 md:px-16 md:py-7 rounded-lg mb-20 md:mb-0">
-      <h2 className="text-xl md:text-3xl font-bold  mb-4 text-center">
+      <h2 className="text-xl md:text-3xl text-gray-700 font-bold  mb-4 text-center">
         Sell your Products
       </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -77,7 +75,7 @@ const SellProduct = () => {
               id="category"
               value={formData.category}
               onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2"
+              className="w-full border bg-white border-gray-300 rounded-lg px-4 py-2"
               required
             >
               <option value="">Select a category</option>
@@ -104,7 +102,7 @@ const SellProduct = () => {
               id="name"
               value={formData.name}
               onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2"
+              className="w-full border bg-white border-gray-300 rounded-lg px-4 py-2"
               placeholder="Enter the product name"
               required
             />
@@ -122,7 +120,7 @@ const SellProduct = () => {
               id="description"
               value={formData.description}
               onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2"
+              className="w-full border bg-white border-gray-300 rounded-lg px-4 py-2"
               placeholder="Enter a short description of the product"
               rows="4"
               required
@@ -142,7 +140,7 @@ const SellProduct = () => {
               id="expiryDate"
               value={formData.expiryDate}
               onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2"
+              className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2"
               required
             />
           </div>
@@ -161,7 +159,7 @@ const SellProduct = () => {
                 id="actualPrice"
                 value={formData.actualPrice}
                 onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2"
+                className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2"
                 placeholder="Enter the actual price"
                 required
               />
@@ -170,7 +168,7 @@ const SellProduct = () => {
             <div>
               <label
                 htmlFor="offerPrice"
-                className="block text-gray-700 font-medium mb-2"
+                className="block  text-gray-700 font-medium mb-2"
               >
                 Price After Offer
               </label>
@@ -180,7 +178,7 @@ const SellProduct = () => {
                 id="offerPrice"
                 value={formData.offerPrice}
                 onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2"
+                className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2"
                 placeholder="Enter the offer price"
                 required
               />
@@ -200,7 +198,7 @@ const SellProduct = () => {
               name="image"
               accept="image/*"
               onChange={handleImageUpload}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2"
+              className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2"
               required
             />
           </div>

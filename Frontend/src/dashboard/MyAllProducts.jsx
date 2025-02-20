@@ -35,7 +35,7 @@ const MyAllProducts = () => {
   return (
     <div className="md:mt-[74px] mt-10 p-2 md:p-4">
       <div className="mx-auto bg-white shadow-md p-4 md:p-6 rounded-lg">
-        <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">
+        <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-600 text-center">
           Uploaded Products
         </h2>
 
@@ -100,7 +100,7 @@ const MyAllProducts = () => {
         </div>
 
         {/* Mobile Cards (Vertical Layout) */}
-        <div className="md:hidden space-y-1">
+        <div className="md:hidden space-y-1 mb-16">
           {products.length > 0 ? (
             products.map((product, index) => (
               <div
@@ -114,11 +114,11 @@ const MyAllProducts = () => {
                     className="w-24 h-16 object-cover rounded-lg"
                   />
                   <div>
-                    <h3 className="text-lg font-semibold">{product.name}</h3>
+                    <h3 className="text-lg text-gray-700 font-semibold">{product.name}</h3>
                     <p className="text-sm text-gray-600">{product.category}</p>
                   </div>
                 </div>
-                <div className="mt-4 space-y-1">
+                <div className="mt-4 space-y-1 text-gray-700">
                   <p>
                     <span className="font-semibold">Price:</span> ₹
                     {product.actualPrice}

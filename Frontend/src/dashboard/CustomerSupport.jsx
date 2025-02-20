@@ -38,7 +38,7 @@ const CustomerSupport = () => {
       <div className="bg-white shadow-lg md:p-6 p-4 rounded-lg  mx-auto">
         {/* Contact Information */}
         <div className="bg-gray-100 p-3 md:p-6 rounded-lg shadow-md">
-          <h3 className="text-xl font-semibold mb-4">📞 Contact Us</h3>
+          <h3 className="text-xl text-gray-700 font-semibold mb-4">📞 Contact Us</h3>
           <ul className="space-y-4 text-gray-700">
             <li className="flex items-center gap-3">
               <FiPhone className="text-lg text-blue-500" />
@@ -92,7 +92,7 @@ const CustomerSupport = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none"
+              className="w-full border-2 bg-white border-gray-300 rounded-lg px-4 py-2 focus:outline-none"
               placeholder="Your Name"
               required
             />
@@ -107,7 +107,7 @@ const CustomerSupport = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none"
+              className="w-full border-2 bg-white border-gray-300 rounded-lg px-4 py-2 focus:outline-none"
               placeholder="Your Email"
               required
             />
@@ -122,7 +122,7 @@ const CustomerSupport = () => {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
-              className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none"
+              className="w-full border-2 border-gray-300 bg-white rounded-lg px-4 py-2 focus:outline-none"
               placeholder="Subject of Inquiry"
               required
             />
@@ -136,7 +136,7 @@ const CustomerSupport = () => {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none resize-none"
+              className="w-full border-2 border-gray-300 rounded-lg bg-white px-4 py-2 focus:outline-none resize-none"
               placeholder="Write your message here..."
               rows="5"
               maxLength={maxChar}

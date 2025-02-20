@@ -21,6 +21,19 @@ const RecommendedProductCard = ({id, name, image, discountedPrice }) => {
 
 
   const handleAddToCart = () => {
+    
+    const product = {
+      id,
+      name,
+      discountedPrice,
+      quantity,
+      image,
+    };
+    
+    addToCart(product); 
+  };
+
+  const handleAddToWishlist = () => {
     setIsWishlisted(!isWishlisted);
     const product = {
       id,
@@ -29,20 +42,8 @@ const RecommendedProductCard = ({id, name, image, discountedPrice }) => {
       quantity,
       image,
     };
-    console.log("Adding to cart:", product);
-    addToCart(product); // Send product to context and backend
-  };
-
-  const handleAddToWishlist = () => {
-    const product = {
-      id,
-      name,
-      discountedPrice,
-      quantity,
-      image,
-    };
-    console.log("Adding to wishlist:", product);
-    addToWishlist(product); // Send product to context and backend
+    
+    addToWishlist(product); 
   };
 
 

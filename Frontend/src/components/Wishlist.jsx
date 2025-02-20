@@ -5,6 +5,7 @@ import { getWishlistApi } from "../apiEndPoints";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../useContext/UserContext";
 import { useWishlist } from "../useContext/WishlistContext";
+import { toast } from "react-toastify";
 
 const Wishlist = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
@@ -55,14 +56,12 @@ const Wishlist = () => {
   };
 
   const handleRemoveItem = async (id) => {
-    console.log("Removing item with id:", id);
-
+   
     try {
       await removeFromWishlist(id); 
       setWishlistItems((prevItems) => prevItems.filter((item) => item._id !== id)); 
-    } catch (error) {
-      console.error("Error removing item from wishlist:", error);
-      alert("Failed to remove item from wishlist. Please try again.");
+    } catch (error) {       
+      toast.error("Failed to remove item from wishlist. Please try again.");
     }
   };
 
@@ -91,7 +90,7 @@ const Wishlist = () => {
   return (
     <div className="relative md:pt-[74px] pt-11 min-h-screen mb-20">
        {/* Header */}
-       <div className="bg-green-500 text-white md:py-4 py-1 px-8 shadow-md">
+       <div className="bg-green-600 hidden md:block text-white md:py-4 py-1 px-8 shadow-md">
           <h1 className="md:text-2xl text-lg font-semibold flex justify-center items-center">
             Your Wishlist
           </h1>
