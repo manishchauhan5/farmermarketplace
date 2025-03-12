@@ -1,5 +1,5 @@
 import express from 'express';
-import { addProduct, deleteProduct, getAllProducts, getAllUserProduct, getProductById, updateProduct } from '../controllers/ProductController.js';
+import { addProduct, deleteProduct, getAllProducts, getAllUserProduct, getProductByCategory, getProductById, updateProduct } from '../controllers/ProductController.js';
 import { uploadImage } from '../middlewares/imageUpload.js';
 import { requireSignIn } from '../middlewares/authMiddleware.js';
 
@@ -7,6 +7,7 @@ const productRouter = express.Router();
 
 productRouter.get('/allProduct', getAllProducts); 
 productRouter.get('/getProduct/:pid', requireSignIn, getProductById); 
+productRouter.get('/getProductByCategory/:category', getProductByCategory); 
 productRouter.get('/allUserProducts', requireSignIn, getAllUserProduct); 
 productRouter.delete('/deleteProduct/:pid',requireSignIn, deleteProduct);
 productRouter.post('/addProduct',requireSignIn, uploadImage.single('image'), addProduct); 
