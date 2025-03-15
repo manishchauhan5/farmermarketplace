@@ -16,6 +16,7 @@ export const getAllProduct =`${baseUrlPruduct }allProduct`;
 export const allUserProduct =`${baseUrlPruduct}allUserProducts`;
 export const ProductById =`${baseUrlPruduct}getProduct`;
 export const ProductByCategory = `${baseUrlPruduct}getProductByCategory`;
+export const updateProduct = `${baseUrlPruduct}updateProduct`;
 
 // Cart
 export const addToCartApi =`${baseUrlCart }addcart`;

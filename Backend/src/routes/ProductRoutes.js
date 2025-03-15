@@ -6,7 +6,7 @@ import { requireSignIn } from '../middlewares/authMiddleware.js';
 const productRouter = express.Router();
 
 productRouter.get('/allProduct', getAllProducts); 
-productRouter.get('/getProduct/:pid', requireSignIn, getProductById); 
+productRouter.get('/getProduct/:pid', getProductById); 
 productRouter.get('/getProductByCategory/:category', getProductByCategory); 
 productRouter.get('/allUserProducts', requireSignIn, getAllUserProduct); 
 productRouter.delete('/deleteProduct/:pid',requireSignIn, deleteProduct);

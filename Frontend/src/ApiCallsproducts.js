@@ -1,6 +1,5 @@
 import axios from "axios";
 import { addProductApi, getAllProduct, ProductByCategory, ProductById } from "./apiEndPoints";
-import { useUser } from "./useContext/UserContext";
 
 const token = localStorage.getItem("token");
 
@@ -37,38 +36,31 @@ export const addProduct = async (productData) => {
 export const getProductById = async (pid) => {
   
   try {
-    const response = await axios.get(`${ProductById}/${pid}`, {
-      headers: {
-        Authorization: token, 
-      },
-    });
+    const response = await axios.get(`${ProductById}/${pid}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching product:", error);
     throw new Error(error.response?.data?.message || "Failed to fetch product");
   }
 }
-
 export const getProductByCategory = async (category) => {
-  
   try {
-    const response = await axios.get(`${ProductByCategory}/${category}`, {
-      headers: {
-        Authorization: token, 
-      },
-    });
+   
+    const encodedCategory = encodeURIComponent(category);
+    const response = await axios.get(`${ProductByCategory}/${encodedCategory}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching product:", error);
     throw new Error(error.response?.data?.message || "Failed to fetch product");
   }
-}
+};
+
 
 export const updateProduct = async (pid, formData) => {
   try {        
     
     const response = await axios.put(
-      `http://localhost:4000/v1/product/updateProduct/${pid}`, 
+      `${updateProduct}/${pid}`, 
       formData
     );
 

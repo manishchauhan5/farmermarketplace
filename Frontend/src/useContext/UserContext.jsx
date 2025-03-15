@@ -1,59 +1,53 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
-// Create UserContext
 const UserContext = createContext();
 
-// Create Provider Component
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem("User");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
 
-  // Load user and token from localStorage on component mount
+  const [token, setToken] = useState(() => localStorage.getItem("token") || null);
+
   const setAuthToken = (token) => {
     if (token) {
-      axios.defaults.headers.common["Authorization"] = token;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     } else {
       delete axios.defaults.headers.common["Authorization"];
     }
   };
-  
-  useEffect(() => {
-    const savedUser = localStorage.getItem("User");
-    const savedToken = localStorage.getItem("token");
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-    if (savedToken) {
-      setToken(savedToken);
-      setAuthToken(savedToken); 
-    }
-  }, []);
 
-    const logOut = () => {
+  useEffect(() => {
+    if (token) {
+      setAuthToken(token);
+    }
+  }, [token]);
+
+  // Function to log out
+  const logOut = () => {
     localStorage.removeItem("User");
     localStorage.removeItem("token");
     setUser(null);
     setToken(null);
-    setAuthToken(null); 
+    setAuthToken(null);
   };
 
+  // Function to update user and token in localStorage and state
   const updateUserAndToken = (userData, authToken) => {
     localStorage.setItem("User", JSON.stringify(userData));
     localStorage.setItem("token", authToken);
     setUser(userData);
     setToken(authToken);
-    setAuthToken(authToken); 
+    setAuthToken(authToken);
   };
 
   return (
-    <UserContext.Provider
-      value={{ user, setUser, token, setToken, logOut, updateUserAndToken }}
-    >
+    <UserContext.Provider value={{ user, setUser, token, setToken, logOut, updateUserAndToken }}>
       {children}
     </UserContext.Provider>
   );
 };
 
-// Custom hook for using UserContext
 export const useUser = () => useContext(UserContext);

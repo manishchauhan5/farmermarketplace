@@ -12,6 +12,11 @@ export const CartProvider = ({ children }) => {
   
   const addToCart = async (product) => {
     setCart([...cart, product]);
+    setCartCount(cart.length + 1);
+    if (!token) {
+      toast.error("Login required to add to cart");
+      return;
+    }
     try {     
       const response = await axios.post(addToCartApi,product, 
         {
@@ -22,8 +27,9 @@ export const CartProvider = ({ children }) => {
       );
       toast.success("Product added to cart successfully!");
     } catch (error) {
-      console.error("Error adding product to cart:", error);
+      // console.error("Error adding product to cart:", error);
       setCart(cart.filter((item) => item.id !== product.id));
+      setCartCount(cart.length); 
       toast.error("Failed to add product to cart. refresh the page");
     }
   };
@@ -42,7 +48,7 @@ export const CartProvider = ({ children }) => {
       });
       toast.success("Product removed from cart successfully");
     } catch (error) {
-      console.error("Error removing product:", error);
+      // console.error("Error removing product:", error);
 
       setCart([...cart, cart.find((item) => item.id === id)]);
       toast.error("Failed to remove product from cart. Please try again.");

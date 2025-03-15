@@ -56,40 +56,35 @@ export const getAllUserProduct = async (req, res) => {
   }
 }
 
-
 export const getProductById = async (req, res) => {
-  
   try {
-
-    const user = req.user._id;
     const product = await ProductModel.findById(req.params.pid);
 
-    if(user !== product.seller.toString()) return res.status(401).json({ message: "Unauthorized" });
-
-    if (!product) return res.status(404).json({ message: "Product not found" });
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
 
     res.status(200).json(product);
   } catch (error) {
-    console.log("error in getting product by id", error);
-    
+    console.error("Error in getting product by ID:", error);
     res.status(500).json({ message: "Server Error", error: error.message });
   }
 };
 
+
 export const getProductByCategory = async (req, res) => {
-  
-  const {category} = req.params;
+  const { category } = req.params;
   try {
-
-    const product = await ProductModel.find({category});
-
-
-    if (!product) return res.status(404).json({ message: "Product not found" });
-
-    res.status(200).json(product);
-  } catch (error) {
-    console.log("error in getting product by id", error);
     
+    const products = await ProductModel.find({ category: new RegExp(`^${category}$`, "i") });
+
+    if (!products || products.length === 0) {
+      return res.status(404).json({ message: "No products found in this category" });
+    }
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.error("Error in fetching product by category:", error);
     res.status(500).json({ message: "Server Error", error: error.message });
   }
 };

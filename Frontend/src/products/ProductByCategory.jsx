@@ -12,22 +12,22 @@ const ProductByCategory = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchProduct = async () => {
-    try {
-      const response = await getProductByCategory(category);
-      setProducts(response);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-      toast("Failed to fetch products. Please try again later.");
-      setError("Failed to fetch products. Please try again later.");
-      setLoading(false);
-    }
-  };
+    const fetchProductCategory = async () => {
+      try {
+        const response = await getProductByCategory(category);
+        setProducts(response);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        toast("Failed to fetch products. Please try again later.");
+        setError("Failed to fetch products. Please try again later.");
+        setLoading(false);
+      }
+    };
 
-  useEffect(() => {
-    fetchProduct();
-  }, [category]);
+    useEffect(() => {
+      fetchProductCategory();
+    }, [category]);
 
   if (error) {
     return (
@@ -56,7 +56,7 @@ const ProductByCategory = () => {
         </h1>
         {loading ? (
           <div className="flex justify-center items-center h-[calc(100vh-170px)]">
-            <FadeLoader color="#36d7b7" size={15} margin={2} /> {/* Render FadeLoader */}
+            <FadeLoader color="#36d7b7" size={15} margin={2} />
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 lg:gap-6 gap-2">
