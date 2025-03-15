@@ -14,6 +14,8 @@ export const loginApi = `${baseUrlAuth}login`;
 export const addProductApi =`${baseUrlPruduct }addProduct`;
 export const getAllProduct =`${baseUrlPruduct }allProduct`;
 export const allUserProduct =`${baseUrlPruduct}allUserProducts`;
+export const ProductById =`${baseUrlPruduct}getProduct`;
+export const ProductByCategory = `${baseUrlPruduct}getProductByCategory`;
 
 // Cart
 export const addToCartApi =`${baseUrlCart }addcart`;
@@ -24,4 +26,6 @@ export const removeCartApi = `${baseUrlCart}deletecart`;
 export const addToWishlistApi =`${baseUrlWishlist }addwishlist`;
 export const getWishlistApi =`${baseUrlWishlist }getwishlist`;
 export const removeWishlistApi = `${baseUrlWishlist}deletewishlist`;
+
+
 

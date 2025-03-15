@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addProductApi, getAllProduct } from "./apiEndPoints";
+import { addProductApi, getAllProduct, ProductByCategory, ProductById } from "./apiEndPoints";
 import { useUser } from "./useContext/UserContext";
 
 const token = localStorage.getItem("token");
@@ -37,7 +37,7 @@ export const addProduct = async (productData) => {
 export const getProductById = async (pid) => {
   
   try {
-    const response = await axios.get(`http://localhost:4000/v1/product/getProduct/${pid}`, {
+    const response = await axios.get(`${ProductById}/${pid}`, {
       headers: {
         Authorization: token, 
       },
@@ -52,7 +52,7 @@ export const getProductById = async (pid) => {
 export const getProductByCategory = async (category) => {
   
   try {
-    const response = await axios.get(`http://localhost:4000/v1/product/getProductByCategory/${category}`, {
+    const response = await axios.get(`${ProductByCategory}/${category}`, {
       headers: {
         Authorization: token, 
       },
