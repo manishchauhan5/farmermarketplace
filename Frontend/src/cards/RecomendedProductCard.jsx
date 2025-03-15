@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { useCart } from "../useContext/CartContext";
 import { useWishlist } from "../useContext/WishlistContext";
+import { useNavigate } from "react-router-dom";
 
 const RecommendedProductCard = ({id, name, image, discountedPrice }) => {
   const [quantity, setQuantity] = useState(1); 
   const [isWishlisted, setIsWishlisted] = useState(false); 
+  const navigate = useNavigate();
    const { addToCart } = useCart();
    const { addToWishlist } = useWishlist();
 
@@ -53,7 +55,10 @@ const RecommendedProductCard = ({id, name, image, discountedPrice }) => {
       <div className="w-64 p-4 hidden bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 md:flex flex-col">
         
         <div className="w-full h-32 overflow-hidden relative flex-shrink-0">
-          <img src={image} alt={name} className="w-full h-full object-cover" />
+          <img onClick={() => {
+            navigate(`/singleproduct/${id}`);
+          }}
+           src={image} alt={name} className="w-full h-full object-cover" />
        
           <button
             onClick={handleAddToWishlist}
@@ -106,7 +111,11 @@ const RecommendedProductCard = ({id, name, image, discountedPrice }) => {
       <div className="w-40 md:hidden bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col">
        
         <div className="w-full h-28 overflow-hidden relative flex-shrink-0">
-          <img src={image} alt={name} className="w-full h-full object-cover" />
+          <img
+          onClick={() => {
+            navigate(`/singleproduct/${id}`);
+          }} 
+           src={image} alt={name} className="w-full h-full object-cover" />
           <button
             onClick={handleAddToWishlist}
             className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors"

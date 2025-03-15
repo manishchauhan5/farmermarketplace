@@ -15,7 +15,7 @@ const WishlistCard = ({ id, name, discountedPrice, image, onRemoveItem, handleMo
       
       <div className="mt-4 flex flex-row space-x-4 w-full items-center justify-center">
         <button
-          onClick={() => handleMoveToCart(id)}
+          // onClick={() => handleMoveToCart(id)}
           className="md:px-4 px-2 md:py-2 py-1 bg-green-700 text-white rounded hover:bg-green-600 w-full"
         >
           Move to Cart

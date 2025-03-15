@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { PhoneHeader } from "./Navbar";
 
 const notificationsData = [
   {
@@ -47,16 +48,19 @@ const Notification = () => {
   };
 
   return (
-    <div className="md:pt-[74px] min-h-screen bg-zinc-100">
+    <>
+    <PhoneHeader/>
+    <div className="md:pt-[74px] pt-14 min-h-screen bg-zinc-100">
+      
       {/* Header */}
-      <div className="bg-green-600 text-white md:py-4 w-full py-2 shadow-md md:relative fixed top-0 z-10">
+      <div className="bg-green-600 text-white md:py-4 w-full py-2 md:shadow-md md:relative top-0 z-10">
         <h1 className="md:text-2xl text-lg font-semibold flex justify-center items-center">
           Notifications
         </h1>
       </div>
 
       {/* Notifications List */}
-      <div className="md:px-10 px-2 md:py-6 py-12 md:space-y-4 space-y-2">
+      <div className="md:px-10 px-2 md:py-6 py-1 md:space-y-4 space-y-2">
         {notifications.length > 0 ? (
           notifications.map((notification) => (
             <div
@@ -113,6 +117,7 @@ const Notification = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

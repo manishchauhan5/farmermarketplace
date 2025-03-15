@@ -4,10 +4,8 @@ import { useUser } from "./useContext/UserContext";
 
 const token = localStorage.getItem("token");
 
-// Add product API call
 export const addProduct = async (productData) => {
   try {
-    // Validate productData
     if (!productData || typeof productData !== "object") {
       throw new Error("Invalid product data");
     }
@@ -24,6 +22,7 @@ export const addProduct = async (productData) => {
     const response = await axios.post(addProductApi, formDataToSend, {
       
       headers: {
+        Authorization: token,
       },
     });
     
@@ -34,10 +33,26 @@ export const addProduct = async (productData) => {
   }
 };
 
+
 export const getProductById = async (pid) => {
   
   try {
     const response = await axios.get(`http://localhost:4000/v1/product/getProduct/${pid}`, {
+      headers: {
+        Authorization: token, 
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    throw new Error(error.response?.data?.message || "Failed to fetch product");
+  }
+}
+
+export const getProductByCategory = async (category) => {
+  
+  try {
+    const response = await axios.get(`http://localhost:4000/v1/product/getProductByCategory/${category}`, {
       headers: {
         Authorization: token, 
       },
@@ -65,4 +80,3 @@ export const updateProduct = async (pid, formData) => {
 };
 
 
-// Get all Products

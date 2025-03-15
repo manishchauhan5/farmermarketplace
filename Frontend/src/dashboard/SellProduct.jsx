@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { addProduct } from "../ApiCallsproducts";
+import { toast } from "react-toastify";
 
 const SellProduct = () => {
   const [formData, setFormData] = useState({
@@ -24,7 +25,7 @@ const SellProduct = () => {
     if (file && file.type.startsWith("image/")) {
       setFormData({ ...formData, image: file });
     } else {
-      alert("Please upload a valid image file.");
+      toast.error("Please upload a valid image file.");
     }
   };
 
@@ -34,7 +35,7 @@ const SellProduct = () => {
 
     try {
       await addProduct(formData);
-      alert("Product added successfully!");
+      toast.success("Product added successfully!");
 
       setFormData({
         category: "",
@@ -57,11 +58,12 @@ const SellProduct = () => {
 
   return (
     <>
-      <div className="md:mt-[74px] mt-10 p-2 md:p-4">
-      <div className="mx-auto bg-white shadow-md p-4 md:px-16 md:py-7 rounded-lg mb-20 md:mb-0">
-      <h2 className="text-xl md:text-3xl text-gray-700 font-bold  mb-4 text-center">
+      <div className="md:mt-[74px] mt-10 p-2 pt-4 md:p-4">
+      <h2 className="text-xl md:text-3xl text-gray-700 font-bold mb-2 md:mb-4 text-center">
         Sell your Products
       </h2>
+      <div className="mx-auto bg-white shadow-md p-4 md:px-16 md:py-7 rounded-lg mb-20 md:mb-0">
+     
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label

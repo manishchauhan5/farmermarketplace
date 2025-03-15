@@ -7,11 +7,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useUser } from "../../useContext/UserContext";
 import { useNavigate } from "react-router-dom";
+import { PhoneHeader, PhoneNavbar } from "../../components/Navbar";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  //extract from userContext
   const { setUser, setToken } = useUser();
+  
   const [showPassword, setShowPassword] = useState(false); 
   const [error, setError] = useState(""); 
   const navigate = useNavigate();
@@ -52,6 +55,8 @@ const Login = () => {
   };
 
   return (
+    <>
+    <PhoneHeader/>
     <div className="min-h-screen flex items-center justify-center bg-zinc-100 p-4 pb-24 md:pb-0">
       <motion.div
         className="w-full max-w-md md:p-6 p-4 bg-white rounded-lg shadow-2xl"
@@ -152,6 +157,7 @@ const Login = () => {
       </motion.div>
 
     </div>
+    </>
   );
 };
 

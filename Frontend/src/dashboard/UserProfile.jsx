@@ -7,6 +7,7 @@ import {
   FiEdit,
   FiTrash2,
 } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 const UserProfile = () => {
 
@@ -39,22 +40,22 @@ const UserProfile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Service is not available for now!");
+    toast.error("Service is not available for now!");
   };
 
   const handleDeleteAccount = () => {
-    alert("Service is not available for now!");
+    toast.error("Service is not available for now!");
     setShowDeleteModal(false);
   };
 
   return (
     <>
-      <div className="md:mt-[74px] mt-10 p-3 md:p-4">
-        <div className="w-full bg-gray-100 h-screen">
+      <div className="md:mt-[74px] mt-16 md:p-4 h-screen">
+        <div className="w-full bg-gray-100">
           <h2 className="md:text-3xl text-xl text-gray-700 font-bold md:mb-4 mb-3 text-center">
             Your Profile
           </h2>
-          <div className="bg-white shadow-lg md:p-12 p-3 rounded-xl">
+          <div className="bg-white lg:shadow-lg md:p-12 p-3 border-2 lg:border-0 lg:rounded-xl">
             {/* Profile Picture */}
             <div className="flex justify-center mb-10">
               <div className="relative">

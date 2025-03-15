@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FiShoppingCart, FiHeart } from "react-icons/fi";
-import { FaSearch, FaUserCircle, FaRegUserCircle, FaShopify } from "react-icons/fa";
+import {
+  FaSearch,
+  FaUserCircle,
+  FaRegUserCircle,
+  FaShopify,
+} from "react-icons/fa";
 import { IoNotificationsCircleOutline } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
 import { GoHomeFill } from "react-icons/go";
@@ -9,6 +14,7 @@ import { useUser } from "../useContext/UserContext";
 import farmer_logo from "../assets/images/farmer_logo.png";
 import { useWishlist } from "../useContext/WishlistContext";
 import { useCart } from "../useContext/CartContext";
+import { useSearch } from "../useContext/SearchContext";
 
 export const Navbar = () => {
   const { wishlistCount } = useWishlist();
@@ -18,18 +24,21 @@ export const Navbar = () => {
   const cities = ["Pune", "Mumbai", "Nagpur", "Thane", "Nashik"];
   const [selectedCity, setSelectedCity] = useState("");
   const { user } = useUser();
+  const name = user?.name;
   const [isLogin, setIsLogin] = useState(false);
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  const { searchTerm, setSearchTerm } = useSearch();
 
   const isDashboard = location.pathname.includes("dashboard");
 
   const handleCityChange = (e) => {
     setSelectedCity(e.target.value);
   };
-  
+
   const handleScroll = () => {
-    if (isDashboard) return; 
+    if (isDashboard) return;
 
     if (window.scrollY > lastScrollY) {
       // Scrolling down
@@ -57,10 +66,14 @@ export const Navbar = () => {
   return (
     <nav
       className={`w-full fixed top-0 z-50 bg-slate-100 shadow-md transition-transform duration-1000 ${
-        isDashboard ? "transform-none" : isNavbarVisible ? "transform-none" : "-translate-y-full"
+        isDashboard
+          ? "transform-none"
+          : isNavbarVisible
+          ? "transform-none"
+          : "-translate-y-full"
       }`}
     >
-      <div className="justify-between items-center h-[75px] px-4 md:px-20 hidden lg:flex">
+      <div className="justify-between items-center h-[75px] px-4 md:px-16 hidden lg:flex">
         <div>
           <NavLink to="/">
             <img src={farmer_logo} alt="logo" className="h-28 w-28 rounded" />
@@ -87,15 +100,18 @@ export const Navbar = () => {
 
           <div className="relative">
             {/* Search input field */}
-            <input
+            <NavLink to="search">
+            <input            
               type="text"
               placeholder="Search products..."
               className="rounded pl-6 pr-12 py-1 shadow-sm text-black text-lg border-2 focus:outline-none focus:border-green-600 w-64 md:w-96"
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
 
             <div className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500">
               <FaSearch />
             </div>
+            </NavLink>
           </div>
 
           <div className="">
@@ -141,7 +157,7 @@ export const Navbar = () => {
               <NavLink to="/dashboard">
                 <div className="flex flex-col justify-center items-center text-gray-700 hover:text-gray-800">
                   <FaUserCircle className="w-7 h-6" />
-                  <h3 className="text-sm font-semibold">Profile</h3>
+                  <h3 className="text-sm font-semibold">{name}</h3>
                 </div>
               </NavLink>
             </div>
@@ -161,24 +177,28 @@ export const Navbar = () => {
   );
 };
 
-
 export const PhoneNavbar = () => {
   const { cartCount } = useCart();
-  const { user } = useUser(); 
-  const navigate = useNavigate(); 
+  const { user } = useUser();
+  const navigate = useNavigate();
+  const name = user?.name;
+
 
   const handleLoginRedirect = () => {
     navigate("/login");
   };
 
   return (
-    <div>  
-
+    <div>
       {/* Bottom Navigation */}
-      <div className="md:hidden">
-        <div className="flex justify-between items-center fixed z-50 bottom-0 w-full bg-white shadow-md py-3 px-8">
+      <div className="lg:hidden ">
+        <div className="flex justify-between items-center fixed z-50 bottom-0 border-t-2 border-gray-300 w-full bg-white shadow-md py-2 px-8">
           <NavLink to="/">
-          <GoHomeFill className="text-2xl h-7 w-7 text-gray-800" />
+            <GoHomeFill className="text-2xl h-7 w-7 text-gray-800" />
+          </NavLink>
+
+          <NavLink to="/search">
+            <FaSearch className="text-xl h-6 w-6 text-gray-800" />
           </NavLink>
 
           {/* notification */}
@@ -203,66 +223,74 @@ export const PhoneNavbar = () => {
 
           {/* dashboard */}
           {user ? (
-              <div className="flex items-center">
-                <NavLink to="/dashboard">
-                  <div className="flex flex-col justify-center items-center text-gray-800 hover:text-gray-900">
-                    <FaUserCircle className="w-7 h-6" />
-                    <h3 className="text-sm font-semibold">Profile</h3>
-                  </div>
-                </NavLink>
-              </div>
-            ) : (
-              <div className="flex items-center">
-                <button onClick={handleLoginRedirect}>
-                  <div className="flex flex-col justify-center text-gray-800 items-center">
-                    <FaRegUserCircle className="w-6 h-6" />
-                    <h3 className="text-sm font-semibold">Login</h3>
-                  </div>
-                </button>
-              </div>
-            )}
+            <div className="flex items-center">
+              <NavLink to="/dashboard">
+                <div className="flex flex-col justify-center items-center text-gray-800 hover:text-gray-900">
+                  <FaUserCircle className="w-7 h-6 text-green-700" />
+                  <h3 className="text-sm font-semibold">{name}</h3>
+                </div>
+              </NavLink>
+            </div>
+          ) : (
+            <div className="flex items-center">
+              <button onClick={handleLoginRedirect}>
+                <div className="flex flex-col justify-center text-gray-800 items-center">
+                  <FaRegUserCircle className="w-6 h-6" />
+                  <h3 className="text-sm font-semibold">Login</h3>
+                </div>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
-  )
-}
-
+  );
+};
 
 // searchbar
 
-export const SearchBar = () => {
+export const PhoneHeader = () => {
+  const cities = ["Pune", "Mumbai", "Nagpur", "Thane", "Nashik"];
+  const [selectedCity, setSelectedCity] = useState("");
+
+  const handleCityChange = (e) => {
+    setSelectedCity(e.target.value);
+  };
   return (
     <>
-    <nav className="fixed top-0 z-50 justify-between md:hidden flex items-center h-14 bg-white shadow-md w-full px-3">
-      <div>
-      <div>
-          <NavLink to="/">
-            <img src={farmer_logo} alt="logo" className="h-14 w-14 rounded" />
-          </NavLink>
+      <nav className="fixed top-0 z-50 flex justify-between items-center h-14 bg-white shadow-md w-full px-4 lg:hidden">
+      {/* Logo */}
+      <NavLink to="/" className="flex items-center">
+        
+        <h1 className="text-xl font-bold text-green-700 drop-shadow-md">
+          Farmer <span className="text-yellow-500">Market</span>
+        </h1>
+      </NavLink>
+
+      {/* Location Selector */}
+      <div className="flex items-center space-x-1">
+        <FaLocationDot className="h-5 w-5 text-gray-500" />
+        <div className="relative">
+          <select
+            value={selectedCity}
+            onChange={handleCityChange}
+            className="p-1 border-gray-300 rounded shadow-sm text-gray-700 text-sm border focus:outline-none 
+                       w-20 bg-gray-100"
+          >
+            <option value="" disabled className="text-xs">
+              Select
+            </option>
+            {cities.map((city, index) => (
+              <option key={index} value={city} className="text-xs">
+                {city}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
-        <div className="relative w-56 ">
-          {/* Search input field */}
-          <input
-            type="text"
-            placeholder="Search products..."
-            className="rounded pl-6 pr-12 py-1 shadow-sm text-black bg-slate-200 text-lg border-2  border-gray-300 focus:outline-none focus:border-green-600 w-full"
-          />
-
-          {/* Search icon */}
-          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
-            <FaSearch />
-          </div>
-        </div>
-        <div></div>
-      </nav>    
+    </nav>
     </>
-  )
-}
+  );
+};
 
-export default Navbar
-
-
-
-
-
+export default Navbar;

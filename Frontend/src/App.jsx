@@ -21,18 +21,22 @@ import Analytics from "./dashboard/Analytics";
 import CustomerSupport from "./dashboard/CustomerSupport";
 import Dashboard from "./dashboard/Dashboard";
 import { ToastContainer } from "react-toastify";
+import Searchproduct from "./components/Searchproduct";
+import ScrollToTop from "./pages/ScrollToTop";
 
 export const App = () => {
   return (
     <>
       <BrowserRouter>
+      <ScrollToTop/>
       <ToastContainer />
         <Routes>
           <Route path="/" element={<AppLayout />}>
             <Route index element={<LandingPage />} />
-            <Route path="productcategory" element={<ProductByCategory />} />
-            <Route path="singleproduct" element={<SingleProduct />} />
+            <Route path="productcategory/:category" element={<ProductByCategory />} />
+            <Route path="singleproduct/:id" element={<SingleProduct />} />
             <Route path="notifications" element={<Notification />} />
+            <Route path="search" element={<Searchproduct />} />
             <Route path="wishlist" element={<Wishlist />} />
             <Route path="cart" element={<Cart />} />
             <Route path="login" element={<Login />} />

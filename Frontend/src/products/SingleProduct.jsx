@@ -1,89 +1,163 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaHeart, FaShoppingCart, FaStar } from "react-icons/fa";
+import { getProductById } from "../ApiCallsproducts";
+import { PhoneHeader } from "../components/Navbar";
+import { FadeLoader } from "react-spinners"; 
+import { useCart } from "../useContext/CartContext";
+import { useWishlist } from "../useContext/WishlistContext";
 
 const SingleProduct = () => {
   const { id } = useParams();
-  const [product] = useState({
-    id: id,
-    name: "Sample Product",
-    price: 100,
-    discountedPrice: 80,
-    rating: 4.5,
-    expiryDate: "2023-12-31",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCUHkLKHWI2n9GOjNGONEu-Y3pCO67sUnuPQ&s",
-    description:
-      "This is a premium quality product made with high-end materials. It is designed to last long and provide maximum satisfaction to the user.",
-  });
+  const { addToCart } = useCart();
+  const [product, setProduct] = useState(null);
+  const [isWishlisted, setIsWishlisted] = useState(false); 
+  const [quantity, setQuantity] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const { addToWishlist } = useWishlist();
 
-  const [isInCart, setIsInCart] = useState(false);
-  const [isInWishlist, setIsInWishlist] = useState(false);
+  const fetchProduct = async () => {
+    try {
+      const res = await getProductById(id);
+      setProduct(res);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching product:", error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProduct();
+  }, [id]);
+
+  const handleIncrement = () => setQuantity(quantity + 1);
+
+  const handleDecrement = () => {
+    if (quantity > 1) setQuantity(quantity - 1);
+  };
+
+  const handleAddToWishlist = () => {
+    const product2 = {
+      id: product._id, 
+      name: product.name, 
+      discountedPrice: product.offerPrice, 
+      quantity: quantity, 
+      image: product.image.url,
+    };
+    
+    addToWishlist(product2); 
+    setIsWishlisted((prev) => !prev);
+  };
+
+  const handleAddToCart = () => {
+    const product2 = {
+      id: product._id, 
+      name: product.name, 
+      discountedPrice: product.offerPrice, 
+      quantity: quantity, 
+      image: product.image.url,
+    };
+    addToCart(product2); 
+  };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-    <div className="container md:mt-[72px] mx-auto p-6  flex justify-center">
-      <div className="max-w-4xl bg-white shadow-lg rounded-xl overflow-hidden grid md:grid-cols-2">
-        {/* Product Image */}
-        <div className="relative h-96 overflow-hidden">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-          />
-        </div>
-
-        {/* Product Details */}
-        <div className="p-6 flex flex-col justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">{product.name}</h1>
-            <div className="flex items-center space-x-2 mb-3">
-              <span className="text-xl font-semibold text-green-600">${product.discountedPrice}</span>
-              <span className="text-lg text-gray-500 line-through">${product.price}</span>
-            </div>
-            
-            {/* Rating */}
-            <div className="flex items-center mb-3">
-              {[...Array(5)].map((_, i) => (
-                <FaStar key={i} className={`text-yellow-500 ${i < product.rating ? '' : 'opacity-50'}`} />
-              ))}
-              <span className="ml-2 text-gray-600">({product.rating})</span>
-            </div>
-
-            {/* Expiry Date */}
-            <p className="text-gray-700 mb-3">
-              <span className="font-medium">Expiry Date:</span> {product.expiryDate}
-            </p>
-
-            {/* Description */}
-            <p className="text-gray-600 mb-6 leading-relaxed">{product.description}</p>
+    <>
+      <PhoneHeader />
+      {loading ? (
+          <div className="flex justify-center items-center h-[calc(100vh-170px)]">
+            <FadeLoader color="#36d7b7" size={15} margin={2} /> 
           </div>
+        ) : 
+        (<div className="flex justify-center items-center min-h-screen p-4"> 
+        <div className="w-full max-w-4xl mx-auto"> 
+          <div className="bg-white shadow-lg rounded-xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
+            <div className="relative h-64 md:h-96 p-2 overflow-hidden">
+              <img
+                src={product.image.url}
+                alt={product.name}
+                className="w-full h-full rounded-lg object-cover"
+              />
+              <button
+                onClick={handleAddToWishlist}
+                className="absolute top-4 right-4 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300"
+              >
+                <FaHeart
+                  className={`text-xl ${
+                    isWishlisted ? "text-red-500" : "text-gray-500"
+                  }`}
+                />
+              </button>
+            </div>
 
-          {/* Buttons */}
-          <div className="flex gap-4">
-            <button
-              onClick={() => setIsInCart(true)}
-              className={`flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold transition-colors duration-300 shadow-md ${
-                isInCart ? "bg-green-500 text-white cursor-not-allowed" : "bg-blue-500 text-white hover:bg-blue-600"
-              }`}
-              disabled={isInCart}
-            >
-              <FaShoppingCart /> {isInCart ? "Added to Cart" : "Add to Cart"}
-            </button>
+            <div className="p-4 md:p-6 flex flex-col justify-between">
+              <div>
+                <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
+                  {product.name}
+                </h1>
+                <div className="flex items-center space-x-2 mb-3">
+                  <span className="text-xl font-semibold text-green-600">
+                    ₹{product.offerPrice}
+                  </span>
+                  <span className="text-lg text-gray-500 line-through">
+                    ₹{product.actualPrice}
+                  </span>
+                </div>
 
-            <button
-              onClick={() => setIsInWishlist(true)}
-              className={`flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold transition-colors duration-300 shadow-md ${
-                isInWishlist ? "bg-pink-500 text-white cursor-not-allowed" : "bg-red-500 text-white hover:bg-red-600"
-              }`}
-              disabled={isInWishlist}
-            >
-              <FaHeart /> {isInWishlist ? "In Wishlist" : "Add to Wishlist"}
-            </button>
+                {/* Rating */}
+                <div className="flex items-center mb-3">
+                  {[...Array(5)].map((_, i) => (
+                    <FaStar
+                      key={i}
+                      className={`text-yellow-500 ${
+                        i < (product.rating || 4) ? "" : "opacity-50"
+                      }`}
+                    />
+                  ))}
+                  <span className="ml-2 text-gray-600">
+                    ({product.rating || 4})
+                  </span>
+                </div>
+
+                <p className="text-gray-700 mb-3">
+                  <span className="font-medium">Expiry Date:</span>{" "}
+                  {new Date(product.expiryDate).toLocaleDateString()}
+                </p>
+
+                <p className="text-gray-600 mb-4 md:mb-6 leading-relaxed">
+                  {product.description}
+                </p>
+              </div>
+
+              <div className="flex flex-row gap-6">
+                <div className="flex items-center w-full md:w-36 justify-between bg-stone-100 rounded">
+                  <button
+                    onClick={handleDecrement}
+                    className="w-10 h-10 lg:w-12 lg:h-12  text-2xl rounded bg-gray-300 text-gray-800 flex justify-center items-center hover:bg-gray-200"
+                  >
+                    -
+                  </button>
+                  <span className="text-xl font-semibold">{quantity}</span>
+                  <button
+                    onClick={handleIncrement}
+                    className="w-10 h-10 lg:w-12 lg:h-12 text-2xl rounded bg-green-500 text-white flex justify-center items-center shadow hover:bg-green-600"
+                  >
+                    +
+                  </button>
+                </div>
+
+                <button 
+                onClick={handleAddToCart}
+                 className="w-full md:flex-1 flex items-center justify-center gap-2 px-4 py-2 lg:py-3 rounded-lg font-semibold transition-colors duration-300 shadow-md bg-green-500">
+                  <FaShoppingCart /> <span>Add to Cart</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    </div>
+      </div>)
+        }
+    </>
   );
 };
 

@@ -17,7 +17,7 @@ const ProductCategory = () => {
           </div>
           <div className="carousel w-full md:rounded-box md:py-5 py-2 md:gap-6 gap-2">
             <div className="carousel-item relative">
-              <NavLink to="/productcategory">
+              <NavLink to="/productcategory/Vegetables">
               <img
                 src={vegetables}
                 className="md:h-36 md:w-[240px] h-20 w-36 md:rounded-lg shadow-md shadow-gray-400"
@@ -28,7 +28,7 @@ const ProductCategory = () => {
               </div>
             </div>
             <div className="carousel-item relative">
-            <NavLink to="/productcategory">
+            <NavLink to="/productcategory/Fruits">
               <img
                 src={fruits}
                 className="md:h-36 md:w-[230px] h-20 w-36 md:rounded-lg shadow-md shadow-gray-400"
@@ -39,7 +39,7 @@ const ProductCategory = () => {
               </div>
             </div>
             <div className="carousel-item relative shadow-md">
-            <NavLink to="/productcategory">
+            <NavLink to="/productcategory/Dry fruits">
               <img
                 src={dryfruits}
                 className="md:h-36 md:w-[230px] h-20 w-36 md:rounded-lg shadow-md shadow-gray-400"
@@ -50,7 +50,7 @@ const ProductCategory = () => {
               </div>
             </div>
             <div className="carousel-item relative">
-            <NavLink to="/productcategory">
+            <NavLink to="/productcategory/Spices">
               <img
                 src={spices}
                 className="md:h-36 md:w-[230px] h-20 w-36 md:rounded-lg shadow-md shadow-gray-400"
@@ -61,7 +61,7 @@ const ProductCategory = () => {
               </div>
             </div>
             <div className="carousel-item relative">
-            <NavLink to="/productcategory">
+            <NavLink to="/productcategory/Dairy products">
               <img
                 src={dairy}
                 className="md:h-36 md:w-[230px] h-20 w-36 md:rounded-lg shadow-md shadow-gray-400"
@@ -72,7 +72,7 @@ const ProductCategory = () => {
               </div>
             </div>
             <div className="carousel-item relative">
-            <NavLink to="/productcategory">
+            <NavLink to="/productcategory/Grains">
               <img
                 src={grains}
                 className="md:h-36 md:w-[230px] h-20 w-36 md:rounded-lg shadow-md shadow-gray-400"
@@ -83,7 +83,7 @@ const ProductCategory = () => {
               </div>
             </div>
             <div className="carousel-item relative">
-            <NavLink to="/productcategory">
+            <NavLink to="/productcategory/Flowers">
               <img
                 src={flowers}
                 className="md:h-36 md:w-[230px] h-20 w-36 md:rounded-lg shadow-md shadow-gray-400"

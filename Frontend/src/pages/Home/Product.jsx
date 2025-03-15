@@ -1,36 +1,39 @@
+
 import React, { useEffect, useState } from "react";
 import ProductCard from "../../cards/ProductCard";
 import { getAllProduct } from "../../apiEndPoints";
 import axios from "axios";
+import { SyncLoader } from "react-spinners";
 
 const Product = () => {
   const [visibleRows, setVisibleRows] = useState(5);
-  const productsPerRow = 2;
+  const productsPerRow = 3; 
   const visibleProducts = visibleRows * productsPerRow;
   const [products, setProducts] = useState([]);
-
-  // Replace this with your actual product data'
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const fetchAllProduct = async () => {
     try {
-      const {data} = await axios.get(getAllProduct);
-     setProducts(data);
+      const { data } = await axios.get(getAllProduct);
+      setProducts(data);
     } catch (error) {
-      console.error("Error fetching product:", error);
-      throw new Error(error || "Failed to fetch product");
+      setError(error.message || "Failed to fetch products");
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
-  useEffect(()=> {
+  useEffect(() => {
     fetchAllProduct();
-  },[])
+  }, []);
 
   const handleSeeMore = () => {
-    setVisibleRows((prevRows) => prevRows + 5);
+    setVisibleRows((prevRows) => prevRows + 2); 
   };
 
   const handleShowLess = () => {
-    setVisibleRows(5);
+    setVisibleRows(5); 
   };
 
   return (
@@ -38,20 +41,25 @@ const Product = () => {
       <div className="w-full md:text-left text-center md:p-5 md:text-3xl text-xl font-bold mb-2 md:mb-0 text-gray-700">
         All Products
       </div>
-      <div className="flex flex-col justify-center items-center">
+      {loading ? (<div className="flex justify-center items-center mt-10 h-24">
+        <SyncLoader color="#36d7b7" size={15} margin={2} /> {/* BeatLoader Spinner */}
+      </div>) : ( <div className="flex flex-col justify-center items-center">
         <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 md:gap-6 gap-2">
-          {products?.map((product) => (
-            <ProductCard
-              key={product._id}
-              id={product._id}
-              name={product.name}
-              price={product.actualPrice}
-              discountedPrice={product.offerPrice}
-              rating={product.rating}
-              expiry={product.expiryDate}
-              image={product.image.url}
-            />
-          ))}
+          {products.slice(0, visibleProducts).map((product) => {
+            const { _id, name, actualPrice, offerPrice, rating, expiryDate, image } = product;
+            return (
+              <ProductCard
+                key={_id}
+                id={_id}
+                name={name}
+                price={actualPrice}
+                discountedPrice={offerPrice}
+                rating={rating}
+                expiry={expiryDate}
+                image={image.url}
+              />
+            );
+          })}
         </div>
 
         <div className="mt-4 flex gap-2 md:gap-5">
@@ -75,7 +83,8 @@ const Product = () => {
             </button>
           )}
         </div>
-      </div>
+      </div>)}
+     
     </div>
   );
 };

@@ -2,19 +2,22 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import RecommendedProductCard from "../../cards/RecomendedProductCard";
 import { getAllProduct } from "../../apiEndPoints";
+import { SyncLoader } from "react-spinners";
 
 const RecomendedProducts = () => {
   const [visibleRows, setVisibleRows] = useState(5);
   const [products, setProducts] = useState([]); 
+  const [loading, setLoading] = useState(true);
   const productsPerRow = 1;
 
   const fetchAllProduct = async () => {
     try {
       const { data } = await axios.get(getAllProduct);
       setProducts(data);
-    } catch (error) {
-      console.error("Error fetching product:", error);
+    } catch (error) {      
       throw new Error(error || "Failed to fetch product");
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -30,13 +33,17 @@ const RecomendedProducts = () => {
     setVisibleRows(5);
   };
 
+
   return (
     <div className="w-full md:mt-8 mt-2 flex flex-col justify-center items-center">
       <div className="w-full md:text-left text-center text-gray-700 p-5 pt-3 md:text-3xl text-xl font-bold">
         Recommended for you
       </div>
-      <div className="flex flex-col justify-center items-center">
-        <div className="grid lg:grid-cols-5 grid-cols-2 md:gap-7 gap-3">
+      {
+        loading ? (<div className="flex justify-center items-center h-24">
+        <SyncLoader color="#36d7b7" size={15} margin={2} /> {/* BeatLoader Spinner */}
+      </div>) :(<div className="flex flex-col justify-center items-center">
+        <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 md:gap-7 gap-3">
           {products.slice(0, visibleRows * productsPerRow).map((product) => (
             <RecommendedProductCard
               key={product._id}
@@ -69,7 +76,8 @@ const RecomendedProducts = () => {
             </button>
           )}
         </div>
-      </div>
+      </div>)
+      }
     </div>
   );
 };

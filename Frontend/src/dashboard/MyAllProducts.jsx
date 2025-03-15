@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { allUserProduct } from "../apiEndPoints";
 import { Link } from "react-router-dom";
+import { FadeLoader } from "react-spinners";
 
 const MyAllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -29,16 +30,29 @@ const MyAllProducts = () => {
     fetchProducts();
   }, []);
 
-  if (loading) return <p className="text-center text-lg">Loading products...</p>;
-  if (error) return <p className="text-center text-red-500">{error}</p>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <FadeLoader color="#36d7b7" size={15} margin={2} /> 
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-gray-100 min-h-screen mt-[74px] p-3 md:p-4 flex justify-center items-center">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="md:mt-[74px] mt-10 p-2 md:p-4">
-      <div className="mx-auto bg-white shadow-md p-4 md:p-6 rounded-lg">
-        <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-600 text-center">
+    <div className="md:mt-[64px] mt-12  lg:p-4">
+      <h2 className="text-2xl md:text-3xl font-bold py-3 text-gray-600 text-center">
           Uploaded Products
         </h2>
-
+      <div className="mx-auto bg-white shadow-md p-4 md:p-6 rounded-lg">
+        
         {/* Desktop Table (Horizontal Scroll) */}
         <div className="hidden md:block overflow-x-auto">
           <table className="w-full table-auto border-collapse border border-gray-300">

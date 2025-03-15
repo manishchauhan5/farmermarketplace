@@ -3,7 +3,7 @@ import ProductCategory from "./ProductCategory";
 import Promo from "./Promo";
 import Product from "./Product";
 import RecomendedProducts from "./RecomendedProducts";
-import { SearchBar } from "../../components/Navbar";
+import { PhoneHeader } from "../../components/Navbar";
 
 
 
@@ -13,7 +13,7 @@ const LandingPage = () => {
     <div className=" pb-8  w-full min-h-screen mt-9 md:mt-[74px] flex flex-col items-center">      
 
         <div className="flex justify-center items-center">
-          <SearchBar/>
+          <PhoneHeader/>
         </div>
 
         {/* promo Slider */} 

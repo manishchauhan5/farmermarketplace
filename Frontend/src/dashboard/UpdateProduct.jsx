@@ -32,7 +32,7 @@ const UpdateProduct = () => {
           image: product.image.url, 
         });
       } catch (error) {
-        console.error("Error fetching product details:", error);
+       
         alert("Failed to fetch product details. Please try again.");
       }
     };
@@ -76,7 +76,7 @@ const UpdateProduct = () => {
       document.getElementById("image").value = "";
    
     } catch (error) {
-      console.error("Error updating product:", error);
+      
       alert(error.message || "Failed to update product. Please try again.");
     } finally {
       setLoading(false);
@@ -85,7 +85,7 @@ const UpdateProduct = () => {
 
   return (
     <>
-    <div className="md:mt-[76px] mt-11 p-2">
+    <div className="md:mt-[76px] text-gray-700 mt-11 p-2">
       <div className="mx-auto bg-white shadow-md p-4 rounded-lg mb-20 md:mb-0">
       <h2 className="text-xl md:text-3xl  font-bold text-center">
         Update Product
@@ -105,7 +105,7 @@ const UpdateProduct = () => {
               id="category"
               value={formData.category}
               onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2"
+              className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2"
               required
             >
               <option value="">Select a category</option>
@@ -133,7 +133,7 @@ const UpdateProduct = () => {
               id="name"
               value={formData.name}
               onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2"
+              className="w-full border bg-white border-gray-300 rounded-lg px-4 py-2"
               placeholder="Enter the product name"
               required
             />
@@ -152,7 +152,7 @@ const UpdateProduct = () => {
               id="description"
               value={formData.description}
               onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2"
+              className="w-full border bg-white border-gray-300 rounded-lg px-4 py-2"
               placeholder="Enter a short description of the product"
               rows="4"
               required
@@ -173,7 +173,7 @@ const UpdateProduct = () => {
               id="expiryDate"
               value={formData.expiryDate}
               onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2"
+              className="w-full border bg-white border-gray-300 rounded-lg px-4 py-2"
               required
             />
           </div>
@@ -193,7 +193,7 @@ const UpdateProduct = () => {
                 id="actualPrice"
                 value={formData.actualPrice}
                 onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2"
+                className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2"
                 placeholder="Enter the actual price"
                 required
               />
@@ -212,7 +212,7 @@ const UpdateProduct = () => {
                 id="offerPrice"
                 value={formData.offerPrice}
                 onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2"
+                className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2"
                 placeholder="Enter the offer price"
                 required
               />
@@ -246,7 +246,7 @@ const UpdateProduct = () => {
               name="image"
               accept="image/*"
               onChange={handleImageUpload}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2"
+              className="w-full border bg-white border-gray-300 rounded-lg px-4 py-2"
             />
           </div>
 

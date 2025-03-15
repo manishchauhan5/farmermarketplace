@@ -5,6 +5,7 @@ import { FaUserAlt, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa
 import { motion } from "framer-motion";
 import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PhoneHeader } from "../../components/Navbar";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -47,6 +48,8 @@ const SignUp = () => {
   };
 
   return (
+    <>
+    <PhoneHeader/>
     <div className="min-h-screen flex items-center justify-center bg-zinc-100 p-4 pb-20 md:pb-0">
       <motion.div
         className="w-full max-w-md md:p-6 p-4 bg-white rounded-lg shadow-2xl"
@@ -183,6 +186,7 @@ const SignUp = () => {
         </div>
       </motion.div>
     </div>
+    </>
   );
 };
 

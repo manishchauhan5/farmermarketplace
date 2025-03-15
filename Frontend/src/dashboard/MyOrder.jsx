@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchOrders } from "../orderService";
+import { FadeLoader } from "react-spinners";
 
 const MyOrder = () => {
   const token = localStorage.getItem("token");
@@ -30,8 +31,8 @@ const MyOrder = () => {
 
   if (loading) {
     return (
-      <div className="bg-gray-100 min-h-screen mt-[74px] p-3 md:p-4 flex justify-center items-center">
-        <p className="text-lg">Loading orders...</p>
+      <div className="flex justify-center items-center h-screen">
+        <FadeLoader color="#36d7b7" size={15} margin={2} /> 
       </div>
     );
   }
@@ -45,16 +46,16 @@ const MyOrder = () => {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen mt-[74px] p-3 md:p-4">
+    <div className="min-h-screen md:mt-[74px] mt-12 p-2 md:p-4 pb-16  md:pb-0">
       {/* Page Title */}
-      <h2 className="text-xl md:text-3xl font-bold text-center md:mb-6 mb-4">My Orders</h2>
+      <h2 className="text-xl md:text-3xl text-gray-700 font-bold text-center md:mb-6 mb-4">My Orders</h2>
 
       {/* Orders List */}
       {orders.length > 0 ? (
         orders.map((order) => (
           <div
             key={order._id}
-            className="bg-white p-4 md:p-6 rounded-lg shadow-md mb-6"
+            className="bg-white text-gray-700 p-4 md:p-6 rounded-lg shadow-md mb-6"
           >
             {/* Order Header */}
             <div className="flex justify-between items-center border-b pb-4">

@@ -4,54 +4,102 @@ import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-green-800 text-white py-8">
-      <div className="container mx-auto px-4">
+    <footer className="bg-green-700 text-white lg:py-3 py-1 pb-[70px] lg:pb-2">
+      <div className="container mx-auto px-4 lg:px-10">
         {/* Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-8">
           {/* About Section */}
           <div className="text-center md:text-left">
-            <h3 className="text-xl font-semibold mb-4">About Us</h3>
-            <p className="text-sm">
-              Connecting farmers directly to consumers, bringing fresh and organic produce to your doorstep.
+            <h3 className="text-lg font-semibold lg:mb-3">About Us</h3>
+            <p className="text-xs md:text-sm text-gray-200">
+              At Farmer Market, we bridge the gap between farmers and consumers, delivering fresh, organic produce straight to your doorstep. Our mission is to support local agriculture and promote sustainable living.
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="text-center">
-            <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li><NavLink to="/" className="hover:text-green-300">Home</NavLink></li>
-              <li><NavLink to="/" className="hover:text-green-300">Products</NavLink></li>
-              <li><NavLink to="/" className="hover:text-green-300">About</NavLink></li>
-              <li><NavLink to="/" className="hover:text-green-300">Contact</NavLink></li>
+            <div className="hidden lg:block">
+            <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
+            <ul className="gap-x-5 flex justify-center text-center items-center ">
+              <li>
+                <NavLink to="/" className="text-xs md:text-sm hover:text-green-300 transition-colors">
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/" className="text-xs md:text-sm hover:text-green-300 transition-colors">
+                  Products
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/" className="text-xs md:text-sm hover:text-green-300 transition-colors">
+                  About Us
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/" className="text-xs md:text-sm hover:text-green-300 transition-colors">
+                  Contact
+                </NavLink>
+              </li>
             </ul>
+            </div>
+            <div className="lg:mt-2 text-yellow-400 font-bold">
+              <div>Design & developed by manish chauhan </div>
+               <div className="text-white underline">
+               <NavLink  to="https://manish-portfolio5.netlify.app/" > 
+                visit my website
+                </NavLink>
+               </div>
+            </div>
           </div>
 
           {/* Social Media and Contact */}
           <div className="text-center md:text-right">
-            <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
+            <h3 className="lg:text-lg font-semibold mb-1 lg:mb-3">Connect With Us</h3>
             <div className="flex justify-center md:justify-end space-x-4">
-              <NavLink to="https://facebook.com" className="hover:text-green-300">
-                <FaFacebook className="text-2xl" />
+              <NavLink
+                to="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-green-300 transition-colors"
+              >
+                <FaFacebook className="text-xl" />
               </NavLink>
-              <NavLink to="https://twitter.com" className="hover:text-green-300">
-                <FaTwitter className="text-2xl" />
+              <NavLink
+                to="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-green-300 transition-colors"
+              >
+                <FaTwitter className="text-xl" />
               </NavLink>
-              <NavLink to="https://instagram.com" className="hover:text-green-300">
-                <FaInstagram className="text-2xl" />
+              <NavLink
+                to="https://www.instagram.com/manish_j4u/profilecard/?igsh=NGo4ZzFmcjY2ZHg2"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-green-300 transition-colors"
+              >
+                <FaInstagram className="text-xl" />
               </NavLink>
-              <NavLink to=  "mailto:info@farmermarket.com" className="hover:text-green-300">
-                <FaEnvelope className="text-2xl" />
+              <NavLink
+                to="mailto:mkchauhan300@gmail.com"
+                className="hover:text-green-300 transition-colors"
+              >
+                <FaEnvelope className="text-xl" />
               </NavLink>
             </div>
-            <p className="mt-4 text-sm">Email: info@farmermarket.com</p>
-            <p className="text-sm">Phone: +123 456 7890</p>
+            <p className="lg:mt-3 mt-2 text-xs md:text-sm text-gray-200">
+              Email: mkchauhan300@gmail.com
+            </p>
+            <p className="text-xs md:text-sm text-gray-200">
+              Phone: +91 7563086449
+            </p>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-green-700 mt-8 pt-4 text-center">
-          <p className="text-sm">
+        <div className="border-t border-green-600 mt-3 pt-2 text-center">
+          <p className="text-xs md:text-sm text-gray-200">
             &copy; {new Date().getFullYear()} Farmer Market. All rights reserved.
           </p>
         </div>

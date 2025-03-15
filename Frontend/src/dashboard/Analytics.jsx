@@ -26,14 +26,14 @@ const Analytics = () => {
   const bestSelling = transactions.reduce((top, t) => (t.quantity > (top.quantity || 0) ? t : top), {}).product || "N/A";
 
   return (
-    <div className="bg-gray-100 min-h-screen pb-16 md:pb-0">
-      <h2 className="text-xl md:text-3xl font-bold text-center mb-4 md:mb-6">Analytics & Reports</h2>
-
+    <div className="md:mt-[74px] mt-12 p-2 md:p-4 pb-20">
+      <h2 className="text-xl md:text-3xl font-bold text-gray-700 text-center mb-4 md:mb-6">Analytics & Reports</h2>
+        <div className="text-center text-red-500">Note:- This is static data, work in progress</div>
       {/* Sales Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 text-gray-700 gap-1 md:gap-4 mb-6">
         <div className="bg-white p-4 rounded-lg shadow-md text-center">
           <h3 className="text-lg font-semibold">Total Sales</h3>
-          <p className="text-xl md:text-2xl font-bold">${totalSales.toFixed(2)}</p>
+          <p className="text-xl md:text-2xl font-bold">₹{totalSales.toFixed(2)}</p>
         </div>
         <div className="bg-white p-4 rounded-lg shadow-md text-center">
           <h3 className="text-lg font-semibold">Total Orders</h3>
@@ -47,7 +47,7 @@ const Analytics = () => {
 
       {/* Sales Chart */}
       <div className="bg-white p-4 md:p-6 rounded-lg shadow-md mb-6">
-        <h3 className="text-lg text-center font-semibold mb-4">Weekly Sales</h3>
+        <h3 className="text-lg text-center text-gray-700 font-semibold mb-4">Weekly Sales</h3>
         <ResponsiveContainer width="100%" height={250}>
           <BarChart data={weeklySales}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -60,7 +60,7 @@ const Analytics = () => {
       </div>
 
       {/* Recent Transactions */}
-      <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
+      <div className="bg-white text-gray-700 p-4 md:p-6 rounded-lg shadow-md">
         <h3 className="text-lg text-center font-semibold mb-4">Recent Transactions</h3>
         <div className="overflow-x-auto">
           <table className="w-full table-auto border-collapse border border-gray-200">
@@ -78,8 +78,8 @@ const Analytics = () => {
                 <tr key={t.id} className="text-center">
                   <td className="border p-2 text-sm md:text-base">{t.product}</td>
                   <td className="border p-2 text-sm md:text-base">{t.quantity}</td>
-                  <td className="border p-2 text-sm md:text-base">${t.price}</td>
-                  <td className="border p-2 text-sm md:text-base font-bold">${t.total}</td>
+                  <td className="border p-2 text-sm md:text-base">₹{t.price}</td>
+                  <td className="border p-2 text-sm md:text-base font-bold">₹{t.total}</td>
                   <td className="border p-2 text-sm md:text-base">{t.date}</td>
                 </tr>
               ))}

@@ -5,12 +5,16 @@ import { getAllProduct } from "../apiEndPoints";
 import ProductCard from "../cards/ProductCard";
 import { PhoneHeader } from "./Navbar";
 import { FadeLoader } from "react-spinners";
+import { useSearch } from "../useContext/SearchContext";
 
 const SearchProduct = () => {
   const [products, setProducts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const { searchTerm } = useSearch();
+  const [searchformobile, setSearchformobile] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+ 
 
   // Fetch products from API
   useEffect(() => {
@@ -28,15 +32,28 @@ const SearchProduct = () => {
     fetchProducts();
   }, []);
 
-  // Filter products based on search term
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filterBySearchMobile = (product) => 
+    product.name.toLowerCase().includes(searchformobile.toLowerCase());
+  
+  const filterBySearchTerm = (product) => 
+    product.name.toLowerCase().includes(searchTerm.toLowerCase());
+
+  const filteredProducts = products.filter((product) => {
+    if (searchformobile) {
+      return filterBySearchMobile(product);
+    }
+    if (searchTerm) {
+      return filterBySearchTerm(product);
+    }
+    return true; 
+  });
+  
+   
 
   return (
     <>
       <PhoneHeader />
-      <div className="min-h-screen lg:mt-[72px] mt-12  bg-gray-100 px-2 py-6">
+      <div className="min-h-screen lg:mt-[72px] mt-12 lg:flex lg:flex-col lg:items-center  bg-gray-100 px-2 py-6">
         {/* Search Bar */}
         <div className="flex lg:hidden w-full justify-center items-center mb-6">
           <div className="relative w-full border-2 mx-2 rounded">
@@ -44,8 +61,8 @@ const SearchProduct = () => {
               type="text"
               placeholder="Search products..."
               className="w-full p-3 pl-10 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              value={searchformobile}
+              onChange={(e) => setSearchformobile(e.target.value)}
             />
             <FaSearch className="absolute right-4 top-4 text-gray-500" />
           </div>

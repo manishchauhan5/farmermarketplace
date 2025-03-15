@@ -11,28 +11,23 @@ export const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
   
   const addToCart = async (product) => {
-
     setCart([...cart, product]);
-
     try {     
-      const response = await axios.post(
-        addToCartApi,
-        product, 
+      const response = await axios.post(addToCartApi,product, 
         {
           headers: {
             Authorization: token
           },
         }
-      ); 
-
+      );
       toast.success("Product added to cart successfully!");
-
     } catch (error) {
       console.error("Error adding product to cart:", error);
       setCart(cart.filter((item) => item.id !== product.id));
-      toast.error("Failed to add product to cart. Please try again.");
+      toast.error("Failed to add product to cart. refresh the page");
     }
   };
+
 
   // Remove from cart function  
   const removeFromCart = async (id) => {
