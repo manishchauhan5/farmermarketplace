@@ -157,7 +157,7 @@ export const Navbar = () => {
               <NavLink to="/dashboard">
                 <div className="flex flex-col justify-center items-center text-gray-700 hover:text-gray-800">
                   <FaUserCircle className="w-7 h-6" />
-                  <h3 className="text-sm font-semibold">{name}</h3>
+                  <h3 className="text-sm font-semibold">user</h3>
                 </div>
               </NavLink>
             </div>
@@ -227,7 +227,7 @@ export const PhoneNavbar = () => {
               <NavLink to="/dashboard">
                 <div className="flex flex-col justify-center items-center text-gray-800 hover:text-gray-900">
                   <FaUserCircle className="w-7 h-6 text-green-700" />
-                  <h3 className="text-sm font-semibold">{name}</h3>
+                  <h3 className="text-sm font-semibold">user</h3>
                 </div>
               </NavLink>
             </div>

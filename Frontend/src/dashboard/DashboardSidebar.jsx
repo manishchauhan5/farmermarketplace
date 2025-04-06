@@ -63,7 +63,7 @@ const DashboardSidebar = () => {
             <div className="w-12 h-12 rounded-full bg-purple-200 flex items-center justify-center">
               <FiUser className="text-2xl text-purple-600" />
             </div>
-            <h2 className="text-lg font-semibold text-gray-700">{email}</h2>
+            <h2 className="text-sm font-semibold text-gray-700">{email}</h2>
           </div>
 
           <nav className="space-y-2">

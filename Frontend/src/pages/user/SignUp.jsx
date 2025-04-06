@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { registerUser } from "../../ApiCallsAuth";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaUserAlt, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { motion } from "framer-motion";
 import {  toast } from "react-toastify";
@@ -15,6 +15,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,9 +32,11 @@ const SignUp = () => {
 
     try {
       const result = await registerUser({ name, email, password });
-      setSuccess(result.message); 
-     
+      setSuccess(result.message);      
       toast.success("Registration successful! Please log in.");
+      setTimeout(() => {
+        navigate("/login"); 
+      }, 1000); 
     } catch (error) {
       
       const errorMessage = error.response?.data?.message || error.message || "Failed to register.";

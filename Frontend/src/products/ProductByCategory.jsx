@@ -50,7 +50,7 @@ const ProductByCategory = () => {
   return (
     <>
       <PhoneHeader />
-      <div className="lg:mt-[70px] mt-12 p-2 lg:p-4 flex flex-col h-screen items-center w-full">
+      <div className="lg:mt-[70px] mt-12 mb-10 lg:mb-0 p-2 lg:p-4 flex flex-col h-screen items-center w-full">
         <h1 className="text-2xl md:text-3xl font-bold text-gray-800 lg:py-3 py-2 text-center capitalize">
           {category}
         </h1>

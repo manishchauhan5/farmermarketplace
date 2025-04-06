@@ -137,7 +137,7 @@ const SingleProduct = () => {
                   >
                     -
                   </button>
-                  <span className="text-xl font-semibold">{quantity}</span>
+                  <span className="text-xl text-gray-700 font-semibold">{quantity}</span>
                   <button
                     onClick={handleIncrement}
                     className="w-10 h-10 lg:w-12 lg:h-12 text-2xl rounded bg-green-500 text-white flex justify-center items-center shadow hover:bg-green-600"
@@ -149,7 +149,7 @@ const SingleProduct = () => {
                 <button 
                 onClick={handleAddToCart}
                  className="w-full md:flex-1 flex items-center justify-center gap-2 px-4 py-2 lg:py-3 rounded-lg font-semibold transition-colors duration-300 shadow-md bg-green-500">
-                  <FaShoppingCart /> <span>Add to Cart</span>
+                  <FaShoppingCart className="text-xl text-white" /> <span className="text-gray-700">Add to Cart</span>
                 </button>
               </div>
             </div>

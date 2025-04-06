@@ -60,7 +60,7 @@ const SearchProduct = () => {
             <input
               type="text"
               placeholder="Search products..."
-              className="w-full p-3 pl-10 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full p-3 bg-gray-50 text-gray-600 pl-10 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
               value={searchformobile}
               onChange={(e) => setSearchformobile(e.target.value)}
             />
